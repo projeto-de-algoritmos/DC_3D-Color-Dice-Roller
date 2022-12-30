@@ -35,6 +35,10 @@ export function drawPolygon4(a, b, c, d, color) {
     canvas.fill();
 }
 
+export function clearCanvas() {
+    canvas.clearRect(0, 0, width, height);
+}
+
 function convert2CanvasCord([x, y]) {
     return [(width/2)-(x*pointsDistance/2), (height/2)-(y*pointsDistance/2)];
 }
