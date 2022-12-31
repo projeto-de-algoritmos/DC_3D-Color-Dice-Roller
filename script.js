@@ -1,12 +1,12 @@
 import * as Dice from './modules/DiceMesh.js';
 import * as Canvas from './modules/Canvas.js';
+import * as Util from './modules/Util.js';
 
-
-let iteration = 600;
-const tickRate = 16;
+let iteration = 207*2;
+const tickRate = 2;
 
 let diceVertices;
-let colorInit;
+let colorI;
 
 window.onload = () => {
     window.addEventListener("contextmenu", e => e.preventDefault());
@@ -19,22 +19,29 @@ window.onload = () => {
 }
 
 function setup() {
-    colorInit = Math.round(Math.random()*5);
+    colorI = Math.trunc(Math.random()*6);
     diceVertices = Dice.vertices();
 }
 
 function loop() {
     Canvas.clearCanvas();
- 
-    let colorI = colorInit-1;
+
+    diceVertices = Util.multiplyMatrices(diceVertices, Util.rotationX(1.5));
+    diceVertices = Util.multiplyMatrices(diceVertices, Util.rotationY(0.5));
+    diceVertices = Util.multiplyMatrices(diceVertices, Util.rotationZ(1));
+    
     Dice.edges.map((edge) => {
         
         colorI = (colorI+1)%6;
+
+        const [nX, nY, nZ] = Util.normalOf3Points(diceVertices[edge[0]], diceVertices[edge[1]], diceVertices[edge[2]]);
+        if(nZ > 0) return;
+        
         Canvas.drawPolygon4(diceVertices[edge[0]], diceVertices[edge[1]], diceVertices[edge[2]], diceVertices[edge[3]], Dice.colors[colorI]);
         
         for(let i = 0; i < 4; i++) {
             Canvas.drawConnectPoints(diceVertices[edge[i]], diceVertices[edge[(i+1)%4]]);
-        
         }
+        
     });
 }
