@@ -2,19 +2,25 @@ import * as Dice from './modules/DiceMesh.js';
 import * as Canvas from './modules/Canvas.js';
 import * as Util from './modules/Util.js';
 
-let iteration = 207*2;
-const tickRate = 4;
+const iteration = 207 * 2
+const tickRate = 1;
 
 let diceVertices;
 let diceColorI;
 let inputColors = [];
 
-window.onload = () => {
+window.onload = () => start()
+
+const restartEl = document.getElementById("restart");
+restartEl.addEventListener('click', () => start());
+
+function start() {
     window.addEventListener("contextmenu", e => e.preventDefault());
     setup();
+    let step = iteration;
     const interval = setInterval(() => {
-        iteration--;
-        if(iteration <= 0) clearInterval(interval);
+        step--;
+        if(step <= 0) clearInterval(interval);
         loop()
     }, tickRate);
 }
