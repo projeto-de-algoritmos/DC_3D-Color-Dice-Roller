@@ -1,44 +1,37 @@
-**!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
+# 3D Color Dice Roller
 
-Temas:
- - Grafos1
- - Grafos2
- - PD
- - D&C
- - Greed
- - Final 
- 
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
-
-# NomedoProjeto
-
-**Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+**Número da Lista**: 36<br>
+**Conteúdo da Disciplina**: D&C<br>
 
 ## Alunos
-|Matrícula | Aluno |
-| -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+
+| Matrícula | Aluno                                                |
+| --------- | ---------------------------------------------------- |
+| 170144488 | [Henrique Melo](https://github.com/HenriqueAmorim20) |
+| 180122258 | [Igor Queiroz Lima](https://github.com/igorq937)     |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+Se trata de um dado de cores em 3D, você pode selecionar as cores do dado e jogar várias vezes. O resultado é a face do dado virada para cima.
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+<img src="assets/prints/1.png" style="height: 300px;"/></br>
+<img src="assets/prints/2.png" style="height: 300px;"/></br>
+<img src="assets/prints/3.png" style="height: 300px;"/></br>
 
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
+**Linguagem**: JavaScript<br>
 
-## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+Pode ser executado utilizando a extensão [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) do VSCode ou utilizando [http-server](https://github.com/http-party/http-server) que pode ser instalado com o comando ``npm install --global http-server``.
 
-## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
+## Uso
+
+Para utilizar sem nenhuma instalação acesse https://projeto-de-algoritmos.github.io/DC_3D-Color-Dice-Roller;
+
+Caso deseje usar a exetensão Live Server do VSCode, abra o arquivo ``index.html`` com a extensão;
+
+Caso deseje usar http-server, basta utilizar o comando no diretório root do projeto ``http-server``.
+
+***OBS:*** Utilizar apenas o navegador e executar o index.html não funcionará!
 
 
 
