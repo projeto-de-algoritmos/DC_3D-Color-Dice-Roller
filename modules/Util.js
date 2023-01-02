@@ -36,25 +36,81 @@ export function normalOf3Points(pointB, pointA, pointC) {
     return [normalX, normalY, normalZ]
 }
 
-export function multiplyMatrices(A, B) {
-    //TODO implement Strassen algorithm
-    let rowsA = A.length;
-    let colsA = A[0].length;
-    let rowsB = B.length;
-    let colsB = B[0].length;
-    let result = [[]];
+export function multiplyMatrices4x4(A, B) {
+    return strassen(A, B);
+}
 
-    if (colsA != rowsB) return null;
+function strassen(A, B) {
+    if (A.length == 1 && B.length == 1) {
+        return [[A[0][0] * B[0][0]]];
+    }
 
-    for (let i = 0; i < rowsA; i++) {
-        result[i] = [];
-        for (let j = 0; j < colsB; j++) {
-            result[i][j] = 0;
-            for (let k = 0; k < colsA; k++) {
-                result[i][j] += A[i][k] * B[k][j];
-            }
+    const [A11, A12, A21, A22] = slice(A);
+    const [B11, B12, B21, B22] = slice(B);
+
+    const M1 = strassen(add(A11, A22), add(B11, B22));
+    const M2 = strassen(add(A21, A22), B11);
+    const M3 = strassen(A11, subtract(B12, B22));
+    const M4 = strassen(A22, subtract(B21, B11));
+    const M5 = strassen(add(A11, A12), B22);
+    const M6 = strassen(subtract(A21, A11), add(B11, B12));
+    const M7 = strassen(subtract(A12, A22), add(B21, B22));
+  
+    const C11 = add(subtract(add(M1, M4), M5), M7);
+    const C12 = add(M3, M5);
+    const C21 = add(M2, M4);
+    const C22 = add(subtract(add(M1, M3), M2), M6);
+
+    return combine(C11, C12, C21, C22);
+}
+
+function slice(A) {
+    const quadrantSize = Math.round(A.length / 2);
+    const A11 = A.slice(0, quadrantSize).map(row => row.slice(0, quadrantSize));
+    const A12 = A.slice(0, quadrantSize).map(row => row.slice(quadrantSize));
+    const A21 = A.slice(quadrantSize).map(row => row.slice(0, quadrantSize));
+    const A22 = A.slice(quadrantSize).map(row => row.slice(quadrantSize));
+    
+    return [A11, A12, A21, A22];
+}
+
+function add(A, B) {
+    const result = [];
+
+    for (let i = 0; i < A.length; i++) {
+        result.push([]);
+        for (let j = 0; j < A[i].length; j++) {
+            result[i][j] = A[i][j] + B[i][j];
         }
     }
-    
+
     return result;
 }
+
+function subtract(A, B) {
+    const result = [];
+
+    for (let i = 0; i < A.length; i++) {
+        result.push([]);
+        for (let j = 0; j < A[i].length; j++) {
+            result[i][j] = A[i][j] - B[i][j];
+        }
+    }
+
+    return result;
+}
+
+function combine(c11, c12, c21, c22) {
+    const result = [];
+
+    for (let i = 0; i < c11.length; i++) {
+        result.push(c11[i].concat(c12[i]));
+    }
+
+    for (let i = 0; i < c21.length; i++) {
+        result.push(c21[i].concat(c22[i]));
+    }
+
+    return result;
+}
+  
