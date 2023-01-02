@@ -8,19 +8,26 @@ const tickRate = 1;
 let diceVertices;
 let diceColorI;
 let inputColors = [];
+let running = false;
 
 window.onload = () => start()
 
 const restartEl = document.getElementById("restart");
-restartEl.addEventListener('click', () => start());
+restartEl.addEventListener('click', () => {
+    if(!running) start()
+});
 
 function start() {
     window.addEventListener("contextmenu", e => e.preventDefault());
     setup();
     let step = iteration;
+    running = true;
     const interval = setInterval(() => {
         step--;
-        if(step <= 0) clearInterval(interval);
+        if (step <= 0) {
+            clearInterval(interval);
+            running = false;
+        }
         loop()
     }, tickRate);
 }
@@ -37,20 +44,19 @@ function loop() {
     diceVertices = multiplyDiceVertices(diceVertices, Util.rotationX(1.5));
     diceVertices = multiplyDiceVertices(diceVertices, Util.rotationY(0.5));
     diceVertices = multiplyDiceVertices(diceVertices, Util.rotationZ(1));
-    
+
     Dice.edges.map((edge) => {
-        
+
         diceColorI = (diceColorI+1)%6;
 
         const [nX, nY, nZ] = Util.normalOf3Points(diceVertices[edge[0]], diceVertices[edge[1]], diceVertices[edge[2]]);
         if(nZ > 0) return;
-        
+
         Canvas.drawPolygon4(diceVertices[edge[0]], diceVertices[edge[1]], diceVertices[edge[2]], diceVertices[edge[3]], inputColors[diceColorI]);
-        
+
         for(let i = 0; i < 4; i++) {
             Canvas.drawConnectPoints(diceVertices[edge[i]], diceVertices[edge[(i+1)%4]]);
         }
-        
     });
 }
 
