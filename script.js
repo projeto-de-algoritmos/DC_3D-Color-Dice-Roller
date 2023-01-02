@@ -6,7 +6,8 @@ let iteration = 207*2;
 const tickRate = 4;
 
 let diceVertices;
-let colorI;
+let diceColorI;
+let inputColors = [];
 
 window.onload = () => {
     window.addEventListener("contextmenu", e => e.preventDefault());
@@ -19,7 +20,8 @@ window.onload = () => {
 }
 
 function setup() {
-    colorI = Math.trunc(Math.random()*6);
+    diceColorI = Math.trunc(Math.random()*6);
+    inputColors = loadColors();
     diceVertices = Dice.vertices();
 }
 
@@ -32,12 +34,12 @@ function loop() {
     
     Dice.edges.map((edge) => {
         
-        colorI = (colorI+1)%6;
+        diceColorI = (diceColorI+1)%6;
 
         const [nX, nY, nZ] = Util.normalOf3Points(diceVertices[edge[0]], diceVertices[edge[1]], diceVertices[edge[2]]);
         if(nZ > 0) return;
         
-        Canvas.drawPolygon4(diceVertices[edge[0]], diceVertices[edge[1]], diceVertices[edge[2]], diceVertices[edge[3]], Dice.colors[colorI]);
+        Canvas.drawPolygon4(diceVertices[edge[0]], diceVertices[edge[1]], diceVertices[edge[2]], diceVertices[edge[3]], inputColors[diceColorI]);
         
         for(let i = 0; i < 4; i++) {
             Canvas.drawConnectPoints(diceVertices[edge[i]], diceVertices[edge[(i+1)%4]]);
@@ -54,4 +56,25 @@ function multiplyDiceVertices(diceVertices, matrix) {
     const result12 = Util.multiplyMatrices4x4(diceVertices12, matrix);
 
     return result11.concat(result12);
+}
+
+function loadColors() {
+    const $colors = document.getElementById('colors');
+    
+    if(localStorage.getItem("colors") === null) {
+        localStorage.setItem("colors", Dice.colors.toString());
+    }
+    let colorHex = localStorage.getItem("colors").split(',');
+    
+    let colorIndex = 0;
+    for (const $color of $colors.children) {
+        $color.value = colorHex[colorIndex];
+        $color.addEventListener("change", (e) => {
+            colorHex[Array.from($colors.children).indexOf($color)] = e.target.value;
+            localStorage.setItem("colors", colorHex.toString());
+        });
+        colorIndex++;
+    }
+
+    return localStorage.getItem("colors").split(',');;
 }
