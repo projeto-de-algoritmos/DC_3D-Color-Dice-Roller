@@ -13,6 +13,10 @@
 ## Sobre 
 Se trata de um dado de cores em 3D, você pode selecionar as cores do dado e jogar várias vezes. O resultado é a face do dado virada para cima.
 
+## Apresentação
+
+https://github.com/projeto-de-algoritmos/DC_3D-Color-Dice-Roller/blob/master/video.mp4
+
 ## Screenshots
 <img src="assets/prints/1.png" style="height: 300px;"/></br>
 <img src="assets/prints/2.png" style="height: 300px;"/></br>
