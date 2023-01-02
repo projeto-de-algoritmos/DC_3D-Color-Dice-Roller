@@ -1,6 +1,6 @@
 const $canvas = document.getElementById("canvas");
-const width = window.innerWidth*0.9;
-const height = window.innerHeight*0.9;
+const width = window.innerWidth * 0.4;
+const height = window.innerHeight;
 
 $canvas.width = width;
 $canvas.height = height;

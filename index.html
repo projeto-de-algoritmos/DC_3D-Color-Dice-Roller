@@ -11,17 +11,21 @@
     </head>
     <body>
         <div id="container">
-            <div id="desc">
-                <H3>SELECIONE AS CORES ACIMA</H3>
-                <H3>PRESSIONE F5 PARA JOGAR NOVAMENTE</H3>
-            </div>
-            <div id="colors">
-                <input id="color1" type="color"/>
-                <input id="color2" type="color"/>
-                <input id="color3" type="color"/>
-                <input id="color4" type="color"/>
-                <input id="color5" type="color"/>
-                <input id="color6" type="color"/>
+            <div class="desc">
+                <h1>Dice Roller 3D</h1>
+                <h5>Escolha suas cores! O Resultado fica virado para cima :)</h5>
+                <div class="select-colors">
+                    <div id="colors">
+                        <H3>SELECIONE AS CORES ABAIXO</H3>
+                        <input id="color1" type="color"/>
+                        <input id="color2" type="color"/>
+                        <input id="color3" type="color"/>
+                        <input id="color4" type="color"/>
+                        <input id="color5" type="color"/>
+                        <input id="color6" type="color"/>
+                    </div>
+                </div>
+                <button id="restart">Jogar Novamente</button>
             </div>
             <canvas id="canvas"></canvas>
         </div>

@@ -3,8 +3,13 @@
     src: url(assets/PixelGameFont.ttf);
 }
 
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     color: white;
     font-family: 'pixelFont';
 }
@@ -14,31 +19,50 @@ body {
     height: 100vh;
     background-color: teal;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.desc {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    padding-right: 5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.464);
 }
 
-#desc {
-    position: absolute;
-    left: auto;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.desc h1 {
+    font-size: 3rem;
 }
 
-#colors {
-    position: absolute;
-    left: auto;
-    bottom: 120px;
-    display: flex;
-    align-items: center;
+.desc h5 {
+    margin: 1rem 0 3rem;
+    font-size: 1.2rem;
 }
 
 #colors input[type="color"] {
     border: none;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     background-color: #00000000;
+}
+
+#restart {
+    padding: 0.5rem 2rem;
+    background-color: transparent;
+    border: 1px solid white !important;
+    cursor: pointer;
+    color: white;
+    font-family: 'pixelFont';
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    transition: 0.5s all ease;
+}
+
+#restart:hover {
+    background-color: white;
+    color: teal;
 }
